@@ -56,7 +56,7 @@ $(".list-group").on('click', 'p', function(){
   textInput.trigger("focus");
 })
 
-$(".list-group").on('blur',"textarea", function(){
+$(".list-group").on('change',"textarea", function(){
   var text = $(this)
   .val()
   .trim();
@@ -91,7 +91,17 @@ $(".list-group").on('click', "span", function(){
 
   $(this).replaceWith(dateInput);
 
+  
+
+  dateInput.datepicker({
+    minDate:1,
+    onClose: function(){
+      $(this).trigger("change");
+    }
+  });
+
   dateInput.trigger("focus");
+
 })
 
 $(".list-group").on('click', "input[type='text']", function(){
@@ -224,6 +234,10 @@ $("#trash").droppable({
     console.log("out");
   }
 })
+
+$("#modalDueDate").datepicker({
+  minDate: 1
+});
 // load tasks for the first time
 loadTasks();
 
